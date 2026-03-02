@@ -75,11 +75,6 @@ bool ZenthEngine::WindowsWindow::CloseRequested()
 
 void ZenthEngine::WindowsWindow::Update()
 {
-    if (m_shouldResize)
-    {
-        Resize();
-    }
-    
     MSG msg;
 
     while (PeekMessageW(&msg, m_window, 0, 0, PM_REMOVE))
@@ -97,19 +92,6 @@ size_t ZenthEngine::WindowsWindow::GetWidth()
 size_t ZenthEngine::WindowsWindow::GetHeight()
 {
 	return m_height;
-}
-
-void ZenthEngine::WindowsWindow::Resize()
-{
-    RECT rect;
-
-    if (GetClientRect(m_window, &rect))
-    {
-        m_width = rect.right - rect.left;
-        m_height = rect.bottom - rect.top;
-
-        m_shouldResize = false;
-    }
 }
 
 LRESULT ZenthEngine::WindowsWindow::WindowProc_Setup(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -140,9 +122,10 @@ LRESULT ZenthEngine::WindowsWindow::WindowProc(HWND wnd, UINT msg, WPARAM wParam
     case WM_SIZE:
         if (lParam && (HIWORD(lParam) != m_height || LOWORD(lParam) != m_width))
         {
-            if (HIWORD(lParam) != 0 || LOWORD(lParam) != 0)
+            if (HIWORD(lParam) >= 64 || LOWORD(lParam) >= 64)
             {
-                m_shouldResize = true;
+                m_width = LOWORD(lParam);
+                m_height = HIWORD(lParam);
             }
         }
         break;

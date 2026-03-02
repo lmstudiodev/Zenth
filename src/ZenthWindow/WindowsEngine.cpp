@@ -5,7 +5,7 @@
 void ZenthEngine::OSInit()
 {
 	Get().Window = std::make_unique<WindowsWindow>();
-	Get().Graphics = std::make_unique<D3D12Graphics>();
+	Get().Graphics = std::make_unique<D3D12Graphics>(*dynamic_cast<WindowsWindow*>(Get().Window.get()));
 }
 
 void ZenthEngine::OSShutdown()
