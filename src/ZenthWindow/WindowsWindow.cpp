@@ -117,6 +117,11 @@ LRESULT ZenthEngine::WindowsWindow::WindowProc_Redirect(HWND wnd, UINT msg, WPAR
 
 LRESULT ZenthEngine::WindowsWindow::WindowProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(wnd, msg, wParam, lParam) == TRUE)
+    {
+        return TRUE;
+    }
+    
     switch (msg)
     {
     case WM_SIZE:
