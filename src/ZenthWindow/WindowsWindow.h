@@ -10,6 +10,8 @@ namespace ZenthEngine
 			WindowsWindow();
 			~WindowsWindow();
 
+			inline HWND GetWindowHandle() { return m_window; }
+
 	public:
 		bool CloseRequested() override;
 		void Update() override;
@@ -22,9 +24,6 @@ namespace ZenthEngine
 		LRESULT WindowProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	private:
-		void Resize();
-
-	private:
 		HINSTANCE m_hInstance = nullptr;
 		ATOM m_wndClass = 0;
 		HWND m_window = nullptr;
@@ -33,6 +32,5 @@ namespace ZenthEngine
 		size_t m_height = 1080;
 
 		bool m_shouldClose = false;
-		bool m_shouldResize;
 	};
 }
