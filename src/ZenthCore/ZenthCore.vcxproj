@@ -17,7 +17,7 @@
   <ItemGroup>
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="IGraphics.h" />
-    <ClInclude Include="ILayer.h" />
+    <ClInclude Include="BasicLayer.h" />
     <ClInclude Include="IWindow.h" />
     <ClInclude Include="LayerStackManager.h" />
     <ClInclude Include="ZenthContext.h" />

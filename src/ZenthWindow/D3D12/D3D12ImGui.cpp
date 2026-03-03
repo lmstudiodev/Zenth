@@ -38,6 +38,8 @@ ZenthEngine::D3D12ImGui::~D3D12ImGui()
     ImGui_ImplWin32_Shutdown();
 
     ImGui::DestroyContext();
+
+    m_imguiDescHeap.Release();
 }
 
 void ZenthEngine::D3D12ImGui::Draw()
