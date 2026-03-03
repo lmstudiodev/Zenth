@@ -1,5 +1,5 @@
 #pragma once
-#include <ZenthCore/ILayer.h>
+#include <ZenthCore/BasicLayer.h>
 #include <ZenthCore/ZenthContext.h>
 #include <ZenthWindow/WinInclude.h>
 #include <ZenthWindow/WindowsWindow.h>
@@ -10,7 +10,7 @@
 
 namespace ZenthEngine
 {
-	class D3D12ImGui : public ILayer
+	class D3D12ImGui : public BasicLayer
 	{
 	public:
 		D3D12ImGui();

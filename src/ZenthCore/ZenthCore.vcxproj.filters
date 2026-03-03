@@ -27,7 +27,7 @@
     <ClInclude Include="LayerStackManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ILayer.h">
+    <ClInclude Include="BasicLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameBase.h">

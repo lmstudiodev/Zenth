@@ -10,11 +10,16 @@ void ZenthEngine::Init()
 {
 	OSInit();
 
-	Get().LayerStack.AttachLayer(Get().Imgui);
+	auto& ctx = Get();
+
+	ctx.Imgui->SetLayerIndex(90);
+	ctx.LayerStack.AttachLayer(ctx.Imgui);
 }
 
 void ZenthEngine::ShutDown()
 {
+	Get().LayerStack.ClearLayers();
+	
 	OSShutdown();
 }
 

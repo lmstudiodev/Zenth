@@ -1,15 +1,20 @@
 #include "LayerStackManager.h"
 
-void ZenthEngine::LayerStackManager::AttachLayer(const std::shared_ptr<ILayer>& layer)
+ZenthEngine::LayerStackManager::~LayerStackManager()
+{
+	ClearLayers();
+}
+
+void ZenthEngine::LayerStackManager::AttachLayer(const std::shared_ptr<BasicLayer>& layer)
 {
 	DetachLayer(layer);
 
-	m_layers.push_back(layer);
+	m_layers.emplace(layer);
 
 	layer->OnAttached();
 }
 
-bool ZenthEngine::LayerStackManager::DetachLayer(const std::shared_ptr<ILayer>& layer)
+bool ZenthEngine::LayerStackManager::DetachLayer(const std::shared_ptr<BasicLayer>& layer)
 {
 	auto existingLayerIt = std::find(m_layers.begin(), m_layers.end(), layer);
 
@@ -39,4 +44,13 @@ bool ZenthEngine::LayerStackManager::UpdateLayers(float dt)
 	}
 	
 	return true;
+}
+
+void ZenthEngine::LayerStackManager::ClearLayers()
+{
+	while (!m_layers.empty())
+	{
+		m_layers.begin()->get()->OnDetached();
+		m_layers.erase(m_layers.begin());
+	}
 }

@@ -10,7 +10,7 @@ int main(int argc, char** argv) \
 
 namespace ZenthEngine
 {
-	class GameBase : public ZenthEngine::ILayer, public std::enable_shared_from_this<GameBase>
+	class GameBase : public ZenthEngine::BasicLayer, public std::enable_shared_from_this<GameBase>
 	{
 	public:
 		GameBase();

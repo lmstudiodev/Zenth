@@ -11,7 +11,7 @@ namespace ZenthEngine
 	{
 		std::shared_ptr<IWindow> Window;
 		std::shared_ptr<IGraphics> Graphics;
-		std::shared_ptr<ILayer> Imgui;
+		std::shared_ptr<BasicLayer> Imgui;
 
 		LayerStackManager LayerStack;
 	};

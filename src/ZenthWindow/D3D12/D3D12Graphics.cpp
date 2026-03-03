@@ -290,6 +290,12 @@ ZenthEngine::D3D12Graphics::~D3D12Graphics()
 
 	ReleaseBuffers();
 
+	m_cmdList.Release();
+
+	m_cmdAllocator.Release();
+
+	m_rtvHeap.Release();
+
 	m_swapChain.Release();
 	
 	CloseHandle(m_directQueueFenceEvent);

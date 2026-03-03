@@ -3,6 +3,8 @@
 ZenthEngine::GameBase::GameBase()
 {
 	ZenthEngine::Init();
+
+	SetLayerIndex(100);
 }
 
 ZenthEngine::GameBase::~GameBase()

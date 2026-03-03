@@ -1,6 +1,6 @@
 #pragma once
-#include <ZenthCore/ILayer.h>
-#include <vector>
+#include <ZenthCore/BasicLayer.h>
+#include <set>
 #include <memory>
 
 namespace ZenthEngine
@@ -8,12 +8,24 @@ namespace ZenthEngine
 	class LayerStackManager
 	{
 	public:
-		void AttachLayer(const std::shared_ptr<ILayer>& layer);
-		bool DetachLayer(const std::shared_ptr<ILayer>& layer);
+		~LayerStackManager();
+
+		void AttachLayer(const std::shared_ptr<BasicLayer>& layer);
+		bool DetachLayer(const std::shared_ptr<BasicLayer>& layer);
 		bool UpdateLayers(float dt);
+		void ClearLayers();
 
 	private:
-		std::vector<std::shared_ptr<ILayer>> m_layers;
+		struct  CompareStruct
+		{
+			bool operator()(const std::shared_ptr<BasicLayer>& lhs, const std::shared_ptr<BasicLayer>& rhs) const
+			{
+				return lhs->GetLayerIndex() < rhs->GetLayerIndex();
+			}
+		};
+
+	private:
+		std::set<std::shared_ptr<BasicLayer>, CompareStruct> m_layers;
 	};
 }
 
