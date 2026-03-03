@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameBase.h" />
     <ClInclude Include="IGraphics.h" />
     <ClInclude Include="ILayer.h" />
     <ClInclude Include="IWindow.h" />
@@ -22,6 +23,7 @@
     <ClInclude Include="ZenthContext.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="LayerStackManager.cpp" />
     <ClCompile Include="ZenthContext.cpp" />
   </ItemGroup>
