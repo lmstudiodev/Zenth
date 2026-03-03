@@ -1,5 +1,7 @@
 #pragma once
 #include <ZenthCore/IGraphics.h>
+#include <ZenthCore/IImGui.h>
+#include <ZenthCore/ZenthContext.h>
 #include <ZenthWindow/WinInclude.h>
 #include <ZenthWindow/WindowsWindow.h>
 #include <ZenthWindow/D3D12/D3D12Debug.h>
@@ -14,7 +16,7 @@ namespace ZenthEngine
 		static const size_t BufferCount = 2;
 
 	public:
-		D3D12Graphics(WindowsWindow& wnd);
+		D3D12Graphics();
 		~D3D12Graphics();
 
 	public:
@@ -27,6 +29,16 @@ namespace ZenthEngine
 
 		size_t GetCanvansWidth() override;
 		size_t GetCanvansHeight() override;
+
+		auto GetDevice()
+		{
+			return m_device;
+		}
+
+		auto GetCommandList()
+		{
+			return m_cmdList;
+		}
 
 	private:
 		void CreateFactory();
@@ -50,7 +62,8 @@ namespace ZenthEngine
 		void ReleaseBuffers();
 
 	private:
-		WindowsWindow& m_window;
+		//IImGui& m_imgui;
+		//WindowsWindow& m_window;
 
 		D3D12Debug m_debug;
 

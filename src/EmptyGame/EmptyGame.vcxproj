@@ -60,17 +60,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)build\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\vendor\Imgui;$(SolutionDir)\vendor;$(SolutionDir)\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop|x64'">
     <OutDir>$(SolutionDir)build\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\vendor\Imgui;$(SolutionDir)\vendor;$(SolutionDir)\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)build\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\vendor\Imgui;$(SolutionDir)\vendor;$(SolutionDir)\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -122,6 +122,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\vendor\Imgui\Imgui.vcxproj">
+      <Project>{7189f629-9e09-40a1-9175-14d840fcce56}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ZenthCore\ZenthCore.vcxproj">
       <Project>{5eca3fbb-56d4-4460-a856-e7ca625c21be}</Project>
     </ProjectReference>

@@ -2,6 +2,10 @@
 #include <ZenthCore/IWindow.h>
 #include <ZenthWindow/WinInclude.h>
 
+#include <imgui.h>
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 namespace ZenthEngine
 {
 	class WindowsWindow : public IWindow

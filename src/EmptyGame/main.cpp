@@ -1,4 +1,5 @@
 #include <ZenthCore/ZenthContext.h>
+#include <imgui/imgui.h>
 
 int main()
 {
@@ -12,6 +13,8 @@ int main()
 		wnd.Update();
 
 		gfx.BeginFrame();
+
+		ImGui::ShowDemoWindow();
 
 		gfx.EndFrame();
 	}

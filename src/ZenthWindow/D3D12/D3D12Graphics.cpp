@@ -1,9 +1,10 @@
 #include "D3D12Graphics.h"
 
-ZenthEngine::D3D12Graphics::D3D12Graphics(WindowsWindow& wnd) : 
-	m_window(wnd), 
-	m_bufferWidth(wnd.GetWidth()), 
-	m_bufferHeight(wnd.GetHeight())
+ZenthEngine::D3D12Graphics::D3D12Graphics() : 
+	//m_window(*dynamic_cast<WindowsWindow*>(Get().Window.get())), 
+	//m_imgui(*Get().Imgui.get()),
+	m_bufferWidth(Get().Window->GetWidth()),
+	m_bufferHeight(Get().Window->GetHeight())
 {
 	m_debug.EnableDebug();
 
@@ -156,7 +157,9 @@ void ZenthEngine::D3D12Graphics::CreateSwapchain()
 	
 	ComPointer<IDXGISwapChain1> tempSwapchain;
 
-	if (FAILED(m_dxgiFactory->CreateSwapChainForHwnd(m_directQueue, m_window.GetWindowHandle(), &scDesc, &scFullScreenDesc, nullptr, &tempSwapchain)))
+	
+
+	if (FAILED(m_dxgiFactory->CreateSwapChainForHwnd(m_directQueue, dynamic_cast<WindowsWindow*>(Get().Window.get())->GetWindowHandle(), &scDesc, &scFullScreenDesc, nullptr, &tempSwapchain)))
 	{
 #ifdef CONF_Debug
 		std::cout << "[ZENTH_ENGINE] D3D12 Swapchain creation failed" << std::endl;
@@ -248,8 +251,8 @@ void ZenthEngine::D3D12Graphics::WaitForFence(UINT64 fenceValue)
 
 void ZenthEngine::D3D12Graphics::ResizeSwapchain()
 {
-	size_t newWidth = m_window.GetWidth();
-	size_t newHeight = m_window.GetHeight();
+	size_t newWidth = Get().Window.get()->GetWidth();
+	size_t newHeight = Get().Window.get()->GetHeight();
 
 	if (newWidth != m_bufferWidth || newHeight != m_bufferHeight)
 	{
@@ -353,6 +356,8 @@ void ZenthEngine::D3D12Graphics::BeginFrame()
 {
 	ResizeSwapchain();
 
+	Get().Imgui->NewFrame();
+
 	m_currentBufferIndex = m_swapChain->GetCurrentBackBufferIndex();
 	auto rtvHandle = m_rtvHandles[m_currentBufferIndex];
 
@@ -368,6 +373,8 @@ void ZenthEngine::D3D12Graphics::BeginFrame()
 
 void ZenthEngine::D3D12Graphics::EndFrame()
 {
+	Get().Imgui->Draw();
+
 	SetRTBarrier(true);
 
 	ExecuteCommandList();
