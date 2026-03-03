@@ -1,8 +1,6 @@
 #include "D3D12Graphics.h"
 
 ZenthEngine::D3D12Graphics::D3D12Graphics() : 
-	//m_window(*dynamic_cast<WindowsWindow*>(Get().Window.get())), 
-	//m_imgui(*Get().Imgui.get()),
 	m_bufferWidth(Get().Window->GetWidth()),
 	m_bufferHeight(Get().Window->GetHeight())
 {
@@ -141,7 +139,7 @@ void ZenthEngine::D3D12Graphics::CreateSwapchain()
 	scDesc.Stereo = FALSE;
 	scDesc.SampleDesc.Count = 1;
 	scDesc.SampleDesc.Quality = 0;
-	scDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER; // | DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	scDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
 	scDesc.BufferCount = BufferCount;
 	scDesc.Scaling = DXGI_SCALING_STRETCH;
 	scDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
@@ -356,8 +354,6 @@ void ZenthEngine::D3D12Graphics::BeginFrame()
 {
 	ResizeSwapchain();
 
-	Get().Imgui->NewFrame();
-
 	m_currentBufferIndex = m_swapChain->GetCurrentBackBufferIndex();
 	auto rtvHandle = m_rtvHandles[m_currentBufferIndex];
 
@@ -366,22 +362,32 @@ void ZenthEngine::D3D12Graphics::BeginFrame()
 	SetRTBarrier(false);
 
 	m_cmdList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+}
+
+void ZenthEngine::D3D12Graphics::EndFrame()
+{
+	SetRTBarrier(true);
+
+	DrawCommandList();
+
+	m_swapChain->Present(1, 0);
+}
+
+void ZenthEngine::D3D12Graphics::PrepareCommandList()
+{
+	m_currentBufferIndex = m_swapChain->GetCurrentBackBufferIndex();
+	auto rtvHandle = m_rtvHandles[m_currentBufferIndex];
+
 	m_cmdList->RSSetViewports(1, &viewPort);
 	m_cmdList->RSSetScissorRects(1, &m_fullRect);
 	m_cmdList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
 }
 
-void ZenthEngine::D3D12Graphics::EndFrame()
+void ZenthEngine::D3D12Graphics::DrawCommandList()
 {
-	Get().Imgui->Draw();
-
-	SetRTBarrier(true);
-
 	ExecuteCommandList();
 
 	FlushQueue();
-	
-	m_swapChain->Present(1, 0);
 
 	m_cmdAllocator->Reset();
 	m_cmdList->Reset(m_cmdAllocator, nullptr);

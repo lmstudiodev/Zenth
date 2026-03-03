@@ -1,6 +1,5 @@
 #pragma once
 #include <ZenthCore/IGraphics.h>
-#include <ZenthCore/IImGui.h>
 #include <ZenthCore/ZenthContext.h>
 #include <ZenthWindow/WinInclude.h>
 #include <ZenthWindow/WindowsWindow.h>
@@ -26,6 +25,7 @@ namespace ZenthEngine
 
 		void BeginFrame() override;
 		void EndFrame() override;
+		void DrawCommandList();
 
 		size_t GetCanvansWidth() override;
 		size_t GetCanvansHeight() override;
@@ -35,8 +35,10 @@ namespace ZenthEngine
 			return m_device;
 		}
 
-		auto GetCommandList()
+		auto SetupAndGetCommandList()
 		{
+			PrepareCommandList();
+			
 			return m_cmdList;
 		}
 
@@ -61,10 +63,9 @@ namespace ZenthEngine
 		void GetBuffers();
 		void ReleaseBuffers();
 
-	private:
-		//IImGui& m_imgui;
-		//WindowsWindow& m_window;
+		void PrepareCommandList();
 
+	private:
 		D3D12Debug m_debug;
 
 		ComPointer<IDXGIFactory7> m_dxgiFactory;

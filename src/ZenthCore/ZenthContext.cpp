@@ -9,6 +9,8 @@ namespace ZenthEngine
 void ZenthEngine::Init()
 {
 	OSInit();
+
+	Get().LayerStack.AttachLayer(Get().Imgui);
 }
 
 void ZenthEngine::ShutDown()

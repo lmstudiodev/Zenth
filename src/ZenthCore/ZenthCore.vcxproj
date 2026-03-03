@@ -16,11 +16,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IGraphics.h" />
-    <ClInclude Include="IImGui.h" />
+    <ClInclude Include="ILayer.h" />
     <ClInclude Include="IWindow.h" />
+    <ClInclude Include="LayerStackManager.h" />
     <ClInclude Include="ZenthContext.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LayerStackManager.cpp" />
     <ClCompile Include="ZenthContext.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
