@@ -30,12 +30,18 @@
     <ClInclude Include="ILayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZenthContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LayerStackManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
