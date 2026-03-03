@@ -5,9 +5,9 @@
 
 void ZenthEngine::OSInit()
 {
-	Get().Window = std::make_unique<WindowsWindow>();
-	Get().Graphics = std::make_unique<D3D12Graphics>();
-	Get().Imgui = std::make_unique<D3D12ImGui>();
+	Get().Window = std::make_shared<WindowsWindow>();
+	Get().Graphics = std::make_shared<D3D12Graphics>();
+	Get().Imgui = std::make_shared<D3D12ImGui>();
 }
 
 void ZenthEngine::OSShutdown()

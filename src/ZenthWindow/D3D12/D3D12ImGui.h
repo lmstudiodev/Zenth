@@ -1,5 +1,5 @@
 #pragma once
-#include <ZenthCore/IImGui.h>
+#include <ZenthCore/ILayer.h>
 #include <ZenthCore/ZenthContext.h>
 #include <ZenthWindow/WinInclude.h>
 #include <ZenthWindow/WindowsWindow.h>
@@ -10,14 +10,14 @@
 
 namespace ZenthEngine
 {
-	class D3D12ImGui : public IImGui
+	class D3D12ImGui : public ILayer
 	{
 	public:
 		D3D12ImGui();
 		~D3D12ImGui();
 
-		void NewFrame() override;
 		void Draw() override;
+		bool Update(float dt) override;
 
 	private:
 		WindowsWindow& m_wnd;
