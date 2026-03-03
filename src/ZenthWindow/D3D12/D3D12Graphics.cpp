@@ -351,6 +351,8 @@ void ZenthEngine::D3D12Graphics::SetRTBarrier(bool isEndFrame)
 
 void ZenthEngine::D3D12Graphics::BeginFrame()
 {
+	
+	
 	ResizeSwapchain();
 
 	m_currentBufferIndex = m_swapChain->GetCurrentBackBufferIndex();

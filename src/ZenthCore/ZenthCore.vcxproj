@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IGraphics.h" />
+    <ClInclude Include="IImGui.h" />
     <ClInclude Include="IWindow.h" />
     <ClInclude Include="ZenthContext.h" />
   </ItemGroup>

@@ -28,6 +28,11 @@ namespace ZenthEngine
 		size_t GetCanvansWidth() override;
 		size_t GetCanvansHeight() override;
 
+		auto GetDevice()
+		{
+			return m_device;
+		}
+
 	private:
 		void CreateFactory();
 		void CreateAdapter();

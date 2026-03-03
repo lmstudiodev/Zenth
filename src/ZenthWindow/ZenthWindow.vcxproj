@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComPointer.h" />
+    <ClInclude Include="D3D12\D3D12ImGui.h" />
     <ClInclude Include="D3D12\D3D12Debug.h" />
     <ClInclude Include="D3D12\D3D12Graphics.h" />
     <ClInclude Include="WindowsEngine.h" />
@@ -23,6 +24,7 @@
     <ClInclude Include="WinInclude.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3D12\D3D12ImGui.cpp" />
     <ClCompile Include="D3D12\D3D12Debug.cpp" />
     <ClCompile Include="D3D12\D3D12Graphics.cpp" />
     <ClCompile Include="WindowsEngine.cpp" />

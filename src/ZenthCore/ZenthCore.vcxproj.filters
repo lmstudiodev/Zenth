@@ -24,6 +24,9 @@
     <ClInclude Include="IGraphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IImGui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZenthContext.cpp">
