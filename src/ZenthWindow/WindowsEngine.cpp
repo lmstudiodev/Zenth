@@ -6,12 +6,13 @@
 void ZenthEngine::OSInit()
 {
 	Get().Window = std::make_unique<WindowsWindow>();
-	Get().Graphics = std::make_unique<D3D12Graphics>(*dynamic_cast<WindowsWindow*>(Get().Window.get()));
-	Get().Imgui = std::make_unique<D3D12ImGui>(*dynamic_cast<WindowsWindow*>(Get().Window.get()), *dynamic_cast<D3D12Graphics*>(Get().Graphics.get()));
+	Get().Graphics = std::make_unique<D3D12Graphics>();
+	Get().Imgui = std::make_unique<D3D12ImGui>();
 }
 
 void ZenthEngine::OSShutdown()
 {
+	Get().Imgui.reset();
 	Get().Graphics.reset();
 	Get().Window.reset();
 }

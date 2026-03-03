@@ -13,7 +13,7 @@ namespace ZenthEngine
 	class D3D12ImGui : public IImGui
 	{
 	public:
-		D3D12ImGui(WindowsWindow& wnd, D3D12Graphics& gfx);
+		D3D12ImGui();
 		~D3D12ImGui();
 
 		void NewFrame() override;

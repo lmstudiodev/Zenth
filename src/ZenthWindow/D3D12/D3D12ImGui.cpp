@@ -1,15 +1,16 @@
 #include "D3D12ImGui.h"
 
-ZenthEngine::D3D12ImGui::D3D12ImGui(WindowsWindow& wnd, D3D12Graphics& gfx) : m_wnd(wnd), m_gfx(gfx)
+ZenthEngine::D3D12ImGui::D3D12ImGui() : m_wnd(*dynamic_cast<WindowsWindow*>(Get().Window.get())), m_gfx(*dynamic_cast<D3D12Graphics*>(Get().Graphics.get()))
 {
     ImGui::CreateContext();
+
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
     ImGui::StyleColorsDark();
 
-    // === Win32 ===
-
     ImGui_ImplWin32_Init(m_wnd.GetWindowHandle());
-
-    // === D3D12 Init ===
 
     D3D12_DESCRIPTOR_HEAP_DESC imguiDescHepDesc{};
     imguiDescHepDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
@@ -41,10 +42,16 @@ ZenthEngine::D3D12ImGui::~D3D12ImGui()
 
 void ZenthEngine::D3D12ImGui::NewFrame()
 {
+    ImGui_ImplDX12_NewFrame();
+    ImGui_ImplWin32_NewFrame();
 
+    ImGui::NewFrame();
 }
 
 void ZenthEngine::D3D12ImGui::Draw()
 {
-
+    ImGui::Render();
+    
+    m_gfx.GetCommandList()->SetDescriptorHeaps(1, &m_imguiDescHeap);
+    ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), m_gfx.GetCommandList());
 }
